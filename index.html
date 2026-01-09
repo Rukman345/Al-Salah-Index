@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al Salah Global Services</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(29, 80, 168, 0.426) 0%, rgba(10, 35, 66, 0.514) 50%, rgba(184, 135, 11, 0.53) 100%);
+    }
+
+    .gold-accent {
+      background: linear-gradient(90deg, #d4af37 0%, #f4e5b0 50%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Header Styles */
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-link {
+      position: relative;
+      color: #003366;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      transition: color 0.3s ease;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #d4af37;
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 80%;
+      left: 10%;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-arrow {
+      display: inline-block;
+      margin-left: 4px;
+      transition: transform 0.3s ease;
+      font-size: 1.2em;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      min-width: 280px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .dropdown-content.active {
+      display: block;
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: #003366;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-item:hover {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+      padding-left: 2rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 350px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 1001;
+      overflow-y: auto;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 999;
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: #003366;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.3s ease;
+    }
+
+    .mobile-nav-link:hover {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+      border-left: 3px solid #d4af37;
+    }
+
+    .mobile-dropdown-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-dropdown-content {
+      display: none;
+      background: #f8f9fa;
+    }
+
+    .mobile-dropdown-content.active {
+      display: block;
+    }
+
+    .mobile-dropdown-item {
+      display: block;
+      padding: 0.75rem 1.5rem 0.75rem 2.5rem;
+      color: #003366;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+    }
+
+    .mobile-dropdown-item:hover {
+      background: rgba(212, 175, 55, 0.15);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #003366;
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    .mobile-menu,
+    .mobile-overlay,
+    .hamburger {
+      display: none;
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-nav {
+        display: none !important;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-menu,
+      .mobile-overlay {
+        display: block;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .mobile-menu,
+      .mobile-overlay,
+      .hamburger {
+        display: none !important;
+      }
+      
+      .desktop-nav {
+        display: flex !important;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .about-tab-content.grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .about-tab-content img {
+        min-height: 300px !important;
+        max-height: 400px !important;
+      }
+
+      .header-nav {
+        padding: 0.75rem 0;
+      }
+
+      .header-nav .max-w-7xl {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      /* Hero section responsive */
+      .hero-section-mobile h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+      }
+
+      .hero-section-mobile h2 {
+        font-size: 1.5rem !important;
+        line-height: 1.3 !important;
+      }
+      }
+
+      .hero-section-mobile h3 {
+        font-size: 1.25rem !important;
+        line-height: 1.4 !important;
+      
+      }
+
+      .hero-section-mobile p {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+      }
+      hero-section-mobile .text-lg {
+        font-size: 1rem !important;
+      }
+
+      .hero-section-mobile .text-xl {
+        font-size: 1.125rem !important;
+      
+
+      /* Statistics section */
+      .stats-mobile {
+        flex-direction: column;
+        gap: 2rem !important;
+      }
+
+      /* ASG Advantage cards */
+      .advantage-card-mobile {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .advantage-card-mobile .flex-shrink-0 {
+        margin: 0 auto 1rem auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .animate-float {
+        font-size: 0.85rem;
+      }
+
+      .about-tab-content img {
+        min-height: 250px !important;
+      }
+
+      /* Mobile specific adjustments */
+      .hero-section-mobile h1 {
+        font-size: 1.75rem !important;
+      }
+
+      .hero-section-mobile h2 {
+        font-size: 1.5rem !important;
+      }
+
+      .hero-section-mobile h3 {
+        font-size: 1.25rem !important;
+      }
+
+      .hero-section-mobile .text-xl {
+        font-size: 1rem !important;
+      }
+
+      .hero-section-mobile .text-2xl {
+        font-size: 1.25rem !important;
+      }
+
+      /* Tab buttons responsive */
+      .about-tab-btn {
+        font-size: 0.875rem;
+        padding: 0.625rem 1rem;
+      }
+
+      /* Core values cards */
+      .core-values-mobile .flex {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .core-values-mobile .flex-shrink-0 {
+        margin: 0 auto 0.5rem auto;
+      }
+    }
+
+    /* Tablet specific adjustments */
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .hero-section-mobile h1 {
+        font-size: 2.5rem !important;
+      }
+
+      .hero-section-mobile h2 {
+        font-size: 2.25rem !important;
+      }
+
+      .hero-section-mobile h3 {
+        font-size: 2rem !important;
+      }
+
+      /* Statistics on tablet */
+      .stats-mobile {
+        gap: 3rem !important;
+      }
+    }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 999;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+
+    .keyboard-key:hover {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #888, 0 3px 5px rgba(0,0,0,0.2) !important;
+    }
+
+    .keyboard-key:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 #888, 0 1px 3px rgba(0,0,0,0.2) !important;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      }
+      50% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.7);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="w-full h-full overflow-auto"><!-- Header Navigation -->
+   <header class="header-nav">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"><!-- Logo -->
+     <div class="flex items-center"><img src="Images/logo1.png" alt="Al Salah Global Services Logo" class="h-12 w-auto" onerror="this.src=''; this.alt='Logo failed to load';"> <span class="ml-3 text-xl font-bold" style="color: #003366;">Al Salah</span>
+     </div><!-- Desktop Navigation -->
+     <div class="desktop-nav flex items-center gap-6"><a href="javascript:void(0)" onclick="scrollToSection('about-section')" class="nav-link">About Us</a>
+      <div class="dropdown" id="desktopDropdown"><a href="javascript:void(0)" class="nav-link" id="desktopDropdownToggle"> Products &amp; Services <span class="dropdown-arrow">›</span> </a>
+       <div class="dropdown-content" id="desktopDropdownContent"><a href="#software" class="dropdown-item">Software &amp; Digital Transformation</a> <a href="#hardware" class="dropdown-item">Hardware &amp; Embedded Systems</a> <a href="#staffing" class="dropdown-item">Specialized IT Staffing Solutions</a> <a href="#security" class="dropdown-item">Specialized Security &amp; Logistics</a>
+       </div>
+      </div><a href="#partners" class="nav-link">Partners</a> <a href="#medias" class="nav-link">Medias</a> <a href="javascript:void(0)" onclick="scrollToSection('contact')" class="nav-link">Contact Us</a>
+     </div><!-- Hamburger Menu -->
+     <div class="hamburger" id="hamburger"><span></span> <span></span> <span></span>
+     </div>
+    </nav>
+   </header><!-- Mobile Menu Overlay -->
+   <div class="mobile-overlay" id="mobileOverlay"></div><!-- Mobile Menu Sidebar -->
+   <div class="mobile-menu" id="mobileMenu">
+    <div class="flex justify-between items-center p-6 border-b"><span class="text-xl font-bold" style="color: #003366;">Menu</span> <button id="closeMenu" class="text-3xl" style="color: #003366;">×</button>
+    </div>
+    <nav><a href="javascript:void(0)" class="mobile-nav-link" onclick="scrollToSection('about-section'); closeMobileMenu();">About Us</a>
+     <div>
+      <div class="mobile-nav-link mobile-dropdown-toggle" id="mobileDropdownToggle"><span>Products &amp; Services</span> <span id="dropdownIcon" style="transition: transform 0.3s ease; font-size: 1.3em;">›</span>
+      </div>
+      <div class="mobile-dropdown-content" id="mobileDropdownContent"><a href="#software" class="mobile-dropdown-item">Software &amp; Digital Transformation</a> <a href="#hardware" class="mobile-dropdown-item">Hardware &amp; Embedded Systems</a> <a href="#staffing" class="mobile-dropdown-item">Specialized IT Staffing Solutions</a> <a href="#security" class="mobile-dropdown-item">Specialized Security &amp; Logistics</a>
+      </div>
+     </div><a href="#partners" class="mobile-nav-link">Partners</a> <a href="#medias" class="mobile-nav-link">Medias</a> <a href="javascript:void(0)" class="mobile-nav-link" onclick="scrollToSection('contact'); closeMobileMenu();">Contact Us</a>
+    </nav>
+   </div><!-- Hero Section -->
+   <section class="relative min-h-screen flex items-center justify-center w-full pt-20 sm:pt-24" style="background-image: url('Images/hero section.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="hero-overlay absolute inset-0"></div>
+    <div class="relative z-10 text-center px-4 sm:px-6 py-16 sm:py-20 max-w-6xl mx-auto hero-section-mobile"><!-- Company Name -->
+     <h1 id="company-name" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 mt-6 sm:mt-8 text-white tracking-tight"></h1><!-- Main Tagline -->
+     <div class="mb-6 sm:mb-8">
+      <h2 id="tagline" class="text-2xl sm:text-3xl md:text-5xl font-bold gold-accent mb-3 sm:mb-4">THE GATEWAY TO GCC INNOVATION</h2>
+     </div><!-- Subtitle -->
+     <h3 id="subtitle" class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-3 sm:mb-4 tracking-wide">Architecting the Future of Technology Across the GCC</h3><!-- Subheading -->
+     <p class="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8 font-light">From Silicon-Level Precision to Enterprise Intelligence</p><!-- Description -->
+     <p id="hero-description" class="text-base sm:text-lg md:text-xl text-gray-100 max-w-4xl mx-auto leading-relaxed mb-6 sm:mb-8 font-light px-2">Al Salah Global delivers high-performance software solutions, precision hardware engineering, and elite technical staffing to empower the Gulf's most ambitious enterprises.</p><!-- Introduction Section -->
+     <div class="max-w-5xl mx-auto mb-10 sm:mb-12 bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-600">
+      <h4 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 gold-accent">Introduction</h4>
+      <div class="text-left space-y-3 sm:space-y-4 text-gray-200 text-sm sm:text-base">
+       <p class="leading-relaxed">The Gulf is moving fast towards smart cities, digital governments, advanced manufacturing, and AI-driven enterprises. Al Salah Global exists to support this transformation by combining deep engineering expertise, enterprise-grade software, and regionally aligned talent solutions.</p>
+       <p class="leading-relaxed">From early-stage system design to full-scale regional deployment, we act as a single technology partner for GCC organisations seeking performance, reliability, and scale.</p>
+      </div>
+     </div><!-- Decorative Elements -->
+     <div class="mt-12 sm:mt-16 flex justify-center gap-6 sm:gap-12 text-white stats-mobile">
+      <div class="text-center animate-float">
+       <div class="text-3xl sm:text-4xl font-bold gold-accent">
+        500+
+       </div>
+       <div class="text-xs sm:text-sm uppercase tracking-wider mt-2">
+        Projects Delivered
+       </div>
+      </div>
+      <div class="text-center animate-float" style="animation-delay: 1s;">
+       <div class="text-3xl sm:text-4xl font-bold gold-accent">
+        50+
+       </div>
+       <div class="text-xs sm:text-sm uppercase tracking-wider mt-2">
+        Enterprise Clients
+       </div>
+      </div>
+      <div class="text-center animate-float" style="animation-delay: 2s;">
+       <div class="text-3xl sm:text-4xl font-bold gold-accent">
+        6
+       </div>
+       <div class="text-xs sm:text-sm uppercase tracking-wider mt-2">
+        GCC Countries
+       </div>
+      </div>
+     </div>
+    </div><!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+     <svg class="w-8 h-8 text-white opacity-75" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+     </svg>
+    </div>
+   </section><!-- UAE Gallery Section -->
+   <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-6" style="background: linear-gradient(180deg, #001a33 0%, #002b4d 100%);">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 sm:mb-12 md:mb-16 text-white">Serving the <span class="gold-accent">Heart of the UAE</span></h2>
+     <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8"><!-- Burj Khalifa -->
+      <div class="hover-lift relative overflow-hidden rounded-2xl shadow-2xl group">
+       <div class="aspect-[4/5] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?w=800');">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+       </div>
+      </div><!-- Sheikh Zayed Grand Mosque -->
+      <div class="hover-lift relative overflow-hidden rounded-2xl shadow-2xl group">
+       <div class="aspect-[4/5] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800');">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+       </div>
+      </div><!-- Dubai Marina -->
+      <div class="hover-lift relative overflow-hidden rounded-2xl shadow-2xl group sm:col-span-2 md:col-span-1">
+       <div class="aspect-[4/5] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1546412414-e1885259563a?w=800');">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Core Value Propositions Section -->
+   <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-6" style="background: linear-gradient(180deg, #001a33 0%, #002b4d 100%);">
+    <div class="max-w-7xl mx-auto">
+     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3 sm:mb-4 text-white">Core Value <span class="gold-accent">Propositions</span></h2>
+     <p class="text-center text-gray-300 mb-10 sm:mb-12 md:mb-16 max-w-3xl mx-auto text-sm sm:text-base px-4">Delivering comprehensive technology solutions across the GCC region</p>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16 md:mb-20"><!-- Elite Tech Staffing -->
+      <div class="hover-lift bg-white bg-opacity-5 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-700">
+       <div class="w-full h-32 sm:h-40 mb-4 sm:mb-6 rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&amp;h=300&amp;fit=crop" alt="Team collaboration" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none';">
+       </div>
+       <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-white">Elite Tech Staffing</h3>
+       <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">On-demand access to highly vetted software engineers, hardware specialists, and digital consultants. Our staffing model bridges the GCC talent gap while ensuring cultural alignment, compliance, and immediate productivity.</p>
+      </div><!-- Software Excellence -->
+      <div class="hover-lift bg-white bg-opacity-5 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-700">
+       <div class="w-full h-32 sm:h-40 mb-4 sm:mb-6 rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&amp;h=300&amp;fit=crop" alt="Software development" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none';">
+       </div>
+       <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-white">Software Excellence</h3>
+       <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Bespoke enterprise software ecosystems designed to streamline operations, improve decision-making, and support regulatory and operational realities across the GCC. From ERP-aligned platforms to cloud-native applications, our solutions are secure, scalable, and localized.</p>
+      </div><!-- Precision Hardware -->
+      <div class="hover-lift bg-white bg-opacity-5 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-700">
+       <div class="w-full h-32 sm:h-40 mb-4 sm:mb-6 rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&amp;h=300&amp;fit=crop" alt="Circuit board technology" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none';">
+       </div>
+       <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-white">Precision Hardware</h3>
+       <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">World-class VLSI, embedded systems, and advanced PCB engineering supporting the Gulf's growing demand for smart infrastructure, industrial automation, and electronics manufacturing engineered for reliability in regional operating conditions.</p>
+      </div><!-- Seamless Integration -->
+      <div class="hover-lift bg-white bg-opacity-5 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-700">
+       <div class="w-full h-32 sm:h-40 mb-4 sm:mb-6 rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&amp;h=300&amp;fit=crop" alt="Global technology network" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none';">
+       </div>
+       <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-white">Seamless Integration</h3>
+       <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">End-to-end delivery from rapid prototyping and architecture design in the UAE to multi-country GCC deployment, long-term support, and continuous optimization.</p>
+      </div>
+     </div><!-- ASG Advantage Section -->
+     <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 border" style="border-color: #d4af37;">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4 text-white">The Al Salah Global Services <span class="gold-accent">(ASG)</span> Advantage</h2>
+      <p class="text-center text-gray-300 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto text-sm sm:text-base px-4">Why leading GCC enterprises choose Al Salah Global as their technology partner</p>
+      <div class="grid sm:grid-cols-2 gap-6 sm:gap-8"><!-- GCC-Centric Expertise -->
+       <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 advantage-card-mobile">
+        <div class="flex-shrink-0">
+         <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=200&amp;h=200&amp;fit=crop" alt="Global expertise" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none';">
+         </div>
+        </div>
+        <div>
+         <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">GCC-Centric Expertise</h3>
+         <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Strategically headquartered in Dubai, we understand GCC regulatory frameworks, procurement processes, language requirements, and enterprise expectations ensuring solutions that work in the real regional environment.</p>
+        </div>
+       </div><!-- Hardware & Software Synergy -->
+       <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 advantage-card-mobile">
+        <div class="flex-shrink-0">
+         <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=200&amp;h=200&amp;fit=crop" alt="Technology synergy" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none';">
+         </div>
+        </div>
+        <div>
+         <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">Hardware &amp; Software Synergy</h3>
+         <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">We are among the few regional players capable of designing both the physical technology (PCBs, embedded systems, firmware) and the enterprise software layers that operate on top of it reducing risk, cost, and integration complexity.</p>
+        </div>
+       </div><!-- Bridging the Talent Gap -->
+       <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 advantage-card-mobile">
+        <div class="flex-shrink-0">
+         <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=200&amp;h=200&amp;fit=crop" alt="Talent solutions" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none';">
+         </div>
+        </div>
+        <div>
+         <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">Bridging the Talent Gap</h3>
+         <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">GCC enterprises face a critical shortage of advanced technical skills. Our staffing and augmentation model provides immediate access to experienced engineers and developers without long recruitment cycles.</p>
+        </div>
+       </div><!-- Vision-Driven Delivery -->
+       <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 advantage-card-mobile">
+        <div class="flex-shrink-0">
+         <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=200&amp;h=200&amp;fit=crop" alt="Vision and innovation" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none';">
+         </div>
+        </div>
+        <div>
+         <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">Vision-Driven Delivery</h3>
+         <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Our solutions are aligned with national digital agendas across the GCC, supporting long-term transformation initiatives, localization goals, and sustainable technology adoption.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- About Us Section -->
+   <section id="about-section" class="py-12 sm:py-16 md:py-20 px-4 sm:px-6" style="background: linear-gradient(180deg, #002b4d 0%, #001a33 100%);">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3 sm:mb-4 text-white">About <span class="gold-accent">Us</span></h2>
+     <p class="text-center text-gray-300 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto text-sm sm:text-base px-4">Heritage, Vision &amp; Local Impact</p><!-- Tab Buttons -->
+     <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12 px-2"><button class="about-tab-btn active px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base" data-tab="story" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%); color: #003366;"> Our Story </button> <button class="about-tab-btn px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 bg-white bg-opacity-5 text-white border border-gray-700 hover:bg-opacity-10 text-sm sm:text-base" data-tab="mission"> Mission </button> <button class="about-tab-btn px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 bg-white bg-opacity-5 text-white border border-gray-700 hover:bg-opacity-10 text-sm sm:text-base" data-tab="vision"> Vision </button> <button class="about-tab-btn px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 bg-white bg-opacity-5 text-white border border-gray-700 hover:bg-opacity-10 text-sm sm:text-base" data-tab="values"> Core Values </button>
+     </div><!-- Tab Content -->
+     <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-gray-700 min-h-[400px] sm:min-h-[500px]"><!-- Our Story -->
+      <div class="about-tab-content active grid grid-cols-1 md:grid-cols-2 gap-0" id="story">
+       <div class="flex items-center justify-center p-6 sm:p-8 md:p-10 order-2 md:order-1"><img src="Images/Al Salah.png" alt="Team collaboration and innovation" class="w-full max-w-md h-auto rounded-xl shadow-lg object-cover" style="max-height: 350px;" onerror="this.src=''; this.style.display='none';">
+       </div>
+       <div class="p-6 sm:p-8 md:p-12 order-1 md:order-2 flex flex-col justify-center">
+        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 gold-accent">Our Story</h3>
+        <div class="text-gray-200 leading-relaxed space-y-3 sm:space-y-4 text-sm sm:text-base">
+         <p>Al Salah Global Services was established in Dubai with a clear purpose: to become a cornerstone of the GCC's digital and engineering evolution. We recognized that the region's next phase of growth required a partner that could operate across software, hardware, and human capital—not in silos, but as an integrated ecosystem.</p>
+         <p>Today, Al Salah Global brings together veteran engineers, enterprise architects, and technology consultants who translate complex technical requirements into high-performance, regionally relevant solutions for government entities, enterprises, and fast-growing organisations across the GCC.</p>
+        </div>
+       </div>
+      </div><!-- Mission Statement -->
+      <div class="about-tab-content grid grid-cols-1 md:grid-cols-2 gap-0" id="mission" style="display: none;">
+       <div class="flex items-center justify-center p-6 sm:p-8 md:p-10 order-2 md:order-1"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&amp;h=800&amp;fit=crop" alt="Digital transformation and technology" class="w-full max-w-md h-auto rounded-xl shadow-lg object-cover" style="max-height: 350px;" onerror="this.src=''; this.style.display='none';">
+       </div>
+       <div class="p-6 sm:p-8 md:p-12 flex flex-col justify-center order-1 md:order-2">
+        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 gold-accent">Mission Statement</h3>
+        <div class="text-gray-200 leading-relaxed">
+         <p class="text-lg sm:text-xl">To accelerate the GCC's digital transformation by delivering precision-engineered technology solutions and elite technical talent—bridging hardware complexity with enterprise simplicity.</p>
+        </div>
+       </div>
+      </div><!-- Vision Statement -->
+      <div class="about-tab-content grid grid-cols-1 md:grid-cols-2 gap-0" id="vision" style="display: none;">
+       <div class="flex items-center justify-center p-6 sm:p-8 md:p-10 order-2 md:order-1"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&amp;h=800&amp;fit=crop" alt="Vision and future technology" class="w-full max-w-md h-auto rounded-xl shadow-lg object-cover" style="max-height: 350px;" onerror="this.src=''; this.style.display='none';">
+       </div>
+       <div class="p-6 sm:p-8 md:p-12 flex flex-col justify-center order-1 md:order-2">
+        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 gold-accent">Vision Statement</h3>
+        <div class="text-gray-200 leading-relaxed">
+         <p class="text-lg sm:text-xl">To be the Gulf's most trusted partner for integrated technology and staffing solutions, recognized for engineering excellence, ethical innovation, and empowering the regional workforce.</p>
+        </div>
+       </div>
+      </div><!-- Our Core Values -->
+      <div class="about-tab-content grid grid-cols-1 md:grid-cols-2 gap-0" id="values" style="display: none;">
+       <div class="flex items-center justify-center p-6 sm:p-8 md:p-10 order-2 md:order-1"><img src="Images/Core.jpg" alt="Core values and teamwork" class="w-full max-w-md h-auto rounded-xl shadow-lg object-cover" style="max-height: 350px;" onerror="this.src=''; this.style.display='none';">
+       </div>
+       <div class="p-6 sm:p-8 md:p-12 core-values-mobile order-1 md:order-2 flex flex-col justify-center">
+        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 gold-accent">Our Core Values</h3>
+        <div class="space-y-4 sm:space-y-6">
+         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mx-auto sm:mx-0" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);"><span class="text-xl sm:text-2xl" style="color: #003366;">🌍</span>
+          </div>
+          <div class="text-center sm:text-left">
+           <h4 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2 text-white">Regional Commitment</h4>
+           <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">We are dedicated to strengthening the GCC's technological independence and long-term digital capability.</p>
+          </div>
+         </div>
+         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mx-auto sm:mx-0" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);"><span class="text-xl sm:text-2xl" style="color: #003366;">🤝</span>
+          </div>
+          <div class="text-center sm:text-left">
+           <h4 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2 text-white">Integrity</h4>
+           <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Transparency, accountability, and ethical delivery guide every engineering design and staffing engagement.</p>
+          </div>
+         </div>
+         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mx-auto sm:mx-0" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);"><span class="text-xl sm:text-2xl" style="color: #003366;">⚡</span>
+          </div>
+          <div class="text-center sm:text-left">
+           <h4 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2 text-white">Agility</h4>
+           <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Fast, responsive execution aligned with the pace of Gulf business and government initiatives.</p>
+          </div>
+         </div>
+         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mx-auto sm:mx-0" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);"><span class="text-xl sm:text-2xl" style="color: #003366;">⭐</span>
+          </div>
+          <div class="text-center sm:text-left">
+           <h4 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2 text-white">Excellence</h4>
+           <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Global quality standards delivered with local understanding and precision.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Industrial Gas Section -->
+     <div class="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mt-12 sm:mt-16 md:mt-20"><!-- Left Column -->
+      <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700">
+       <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 gold-accent">Why Industrial Gas Companies Choose Al Salah Global</h3>
+       <ul class="space-y-3 sm:space-y-4 text-gray-200">
+        <li class="flex items-start gap-3"><span class="text-lg sm:text-xl flex-shrink-0" style="color: #d4af37;">✓</span> <span class="text-sm sm:text-base leading-relaxed">Designed specifically for high-value, safety-critical assets</span></li>
+        <li class="flex items-start gap-3"><span class="text-lg sm:text-xl flex-shrink-0" style="color: #d4af37;">✓</span> <span class="text-sm sm:text-base leading-relaxed">Proven scalability across large cylinder populations</span></li>
+        <li class="flex items-start gap-3"><span class="text-lg sm:text-xl flex-shrink-0" style="color: #d4af37;">✓</span> <span class="text-sm sm:text-base leading-relaxed">Reduces asset losses and improves ROI on cylinder fleets</span></li>
+        <li class="flex items-start gap-3"><span class="text-lg sm:text-xl flex-shrink-0" style="color: #d4af37;">✓</span> <span class="text-sm sm:text-base leading-relaxed">Enhances compliance with GCC safety and quality standards</span></li>
+       </ul>
+      </div><!-- Right Column -->
+      <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700">
+       <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 gold-accent">Unified Advantage Across LPG &amp; Industrial Gases</h3>
+       <p class="text-gray-200 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">Whether serving the LPG or industrial gases sector, Al Salah Global's platforms deliver:</p>
+       <ul class="space-y-3 sm:space-y-4 text-gray-200">
+        <li class="flex items-start gap-3"><span class="text-lg sm:text-xl flex-shrink-0" style="color: #d4af37;">✓</span> <span class="text-sm sm:text-base leading-relaxed">Operational transparency</span></li>
+        <li class="flex items-start gap-3"><span class="text-lg sm:text-xl flex-shrink-0" style="color: #d4af37;">✓</span> <span class="text-sm sm:text-base leading-relaxed">Asset protection and lifecycle control</span></li>
+        <li class="flex items-start gap-3"><span class="text-lg sm:text-xl flex-shrink-0" style="color: #d4af37;">✓</span> <span class="text-sm sm:text-base leading-relaxed">Regulatory readiness</span></li>
+        <li class="flex items-start gap-3"><span class="text-lg sm:text-xl flex-shrink-0" style="color: #d4af37;">✓</span> <span class="text-sm sm:text-base leading-relaxed">Digital transformation aligned with GCC industry needs</span></li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Us Section -->
+   <section id="contact" class="py-12 sm:py-16 md:py-20 px-4 sm:px-6" style="background: linear-gradient(180deg, #001a33 0%, #002b4d 100%);">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3 sm:mb-4 text-white">Contact <span class="gold-accent">Us</span></h2>
+     <p class="text-center text-gray-300 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto text-sm sm:text-base px-4">Let's Build the Future Together</p><!-- Intro Text -->
+     <div class="text-center mb-8 sm:mb-10 md:mb-12">
+      <p class="text-gray-200 text-base sm:text-lg leading-relaxed max-w-4xl mx-auto mb-4 sm:mb-6">Whether you are planning a new product, modernizing existing systems, or scaling your IT capabilities, Al Salah Global is ready to support you.</p>
+      <h3 class="text-xl sm:text-2xl md:text-3xl font-bold gold-accent mb-6 sm:mb-8">Let's Engineer Your Next Success in the GCC</h3>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12"><!-- Left Column - Contact Information -->
+      <div class="space-y-6 sm:space-y-8"><!-- Dubai Headquarters -->
+       <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700">
+        <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 gold-accent">Reach Our Dubai Headquarters</h3>
+        <div class="space-y-4 sm:space-y-5 text-gray-200"><!-- Location -->
+         <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);"><span class="text-xl sm:text-2xl" style="color: #003366;">📍</span>
+          </div>
+          <div>
+           <h4 class="font-bold text-base sm:text-lg mb-1 text-white">Location</h4>
+           <p class="text-sm sm:text-base">Dubai, United Arab Emirates</p>
+          </div>
+         </div><!-- Phone -->
+         <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);"><span class="text-xl sm:text-2xl" style="color: #003366;">📞</span>
+          </div>
+          <div>
+           <h4 class="font-bold text-base sm:text-lg mb-1 text-white">Phone</h4>
+           <p class="text-sm sm:text-base">+971-50-676-8820</p>
+           <p class="text-sm sm:text-base">+971-50-364-6205</p>
+          </div>
+         </div><!-- Email -->
+         <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);"><span class="text-xl sm:text-2xl" style="color: #003366;">📧</span>
+          </div>
+          <div>
+           <h4 class="font-bold text-base sm:text-lg mb-1 text-white">Email</h4>
+           <p class="text-sm sm:text-base">info@salahglobal.com</p>
+          </div>
+         </div><!-- Business Hours -->
+         <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);"><span class="text-xl sm:text-2xl" style="color: #003366;">🕒</span>
+          </div>
+          <div>
+           <h4 class="font-bold text-base sm:text-lg mb-1 text-white">Business Hours</h4>
+           <p class="text-sm sm:text-base">Monday – Friday</p>
+           <p class="text-sm sm:text-base">9:00 AM – 6:00 PM (GST)</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Consultation Inquiry Info -->
+       <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 gold-accent">Consultation Inquiry</h3>
+        <p class="text-gray-200 text-sm sm:text-base leading-relaxed mb-4">Looking for enterprise software development, advanced engineering solutions, or elite technical staffing in the UAE, Saudi Arabia, or any other GCC countries?</p>
+        <p class="text-gray-200 text-sm sm:text-base leading-relaxed">Our consultants provide localized expertise and strategic guidance tailored to GCC market realities. Schedule a discovery call to explore how Al Salah Global can support your next initiative.</p>
+       </div>
+      </div><!-- Right Column - Contact Form -->
+      <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700">
+       <h3 class="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-white text-center">Submit Your Inquiry</h3>
+       <form id="contactForm" class="space-y-5 sm:space-y-6"><!-- Full Name -->
+        <div><label for="fullName" class="block text-white font-semibold mb-2 text-sm sm:text-base">Full Name <span style="color: #d4af37;">*</span></label> <input type="text" id="fullName" name="fullName" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-opacity-100 transition-all text-sm sm:text-base" style="border-color: #d4af37;" placeholder="Enter your full name">
+        </div><!-- Company -->
+        <div><label for="company" class="block text-white font-semibold mb-2 text-sm sm:text-base">Company <span style="color: #d4af37;">*</span></label> <input type="text" id="company" name="company" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-opacity-100 transition-all text-sm sm:text-base" style="border-color: #d4af37;" placeholder="Enter your company name">
+        </div><!-- Email -->
+        <div><label for="email" class="block text-white font-semibold mb-2 text-sm sm:text-base">Email <span style="color: #d4af37;">*</span></label> <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-opacity-100 transition-all text-sm sm:text-base" style="border-color: #d4af37;" placeholder="Enter your email address">
+        </div><!-- Phone -->
+        <div><label for="phone" class="block text-white font-semibold mb-2 text-sm sm:text-base">Phone <span style="color: #d4af37;">*</span></label> <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-opacity-100 transition-all text-sm sm:text-base" style="border-color: #d4af37;" placeholder="Enter your phone number">
+        </div><!-- Message / Project Brief -->
+        <div><label for="message" class="block text-white font-semibold mb-2 text-sm sm:text-base">Message / Project Brief <span style="color: #d4af37;">*</span></label> <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-opacity-100 transition-all resize-none text-sm sm:text-base" style="border-color: #d4af37;" placeholder="Tell us about your project or inquiry..."></textarea>
+        </div><!-- Submit Button --> <button type="submit" class="w-full py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg transition-all keyboard-key" style="background: linear-gradient(180deg, #f4e5b0 0%, #d4af37 50%, #b8941f 100%); color: #003366; border: 2px solid #a68427; box-shadow: 0 4px 0 #8b6f1f, 0 5px 10px rgba(0,0,0,0.3); text-shadow: 0 1px 0 rgba(255,255,255,0.5);"> Submit Inquiry </button>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section><!-- Floating WhatsApp Button --> <a href="https://wa.me/971506768820" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contact us on WhatsApp">
+    <svg class="w-8 h-8" fill="white" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg></a> <!-- Footer -->
+   <footer class="py-8 sm:py-10 md:py-12 px-4 sm:px-6 text-center" style="background-color: #001a33;">
+    <div class="max-w-4xl mx-auto"><!-- Social Media Icons -->
+     <div class="flex justify-center items-center gap-4 mb-6 sm:mb-8"><a href="https://wa.me/971506768820" target="_blank" rel="noopener noreferrer" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all hover-lift" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);" aria-label="WhatsApp">
+       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="white" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+       </svg></a> <a href="https://www.linkedin.com/company/salahglobal/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all hover-lift" style="background: linear-gradient(135deg, #0077B5 0%, #005885 100%);" aria-label="LinkedIn">
+       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="white" viewbox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+       </svg></a> <a href="https://www.instagram.com/al_salah_1?igsh=aXl1eWV5Z2IzdHkz" target="_blank" rel="noopener noreferrer" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all hover-lift" style="background: linear-gradient(135deg, #E4405F 0%, #C13584 50%, #833AB4 100%);" aria-label="Instagram">
+       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="white" viewbox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+       </svg></a> <a href="https://youtube.com/@alsalahglobalservices?si=1YIFetuiSFGt-sA-" target="_blank" rel="noopener noreferrer" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all hover-lift" style="background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);" aria-label="YouTube">
+       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="white" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+       </svg></a>
+     </div><!-- Footer Links -->
+     <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-6 mb-4 text-xs sm:text-sm"><a href="#privacy" class="text-gray-400 hover:text-white transition-colors" style="color: #9ca3af;">Privacy Policy</a> <span class="text-gray-600">|</span> <a href="#terms" class="text-gray-400 hover:text-white transition-colors" style="color: #9ca3af;">Terms of Service</a> <span class="text-gray-600">|</span> <a href="#careers" class="text-gray-400 hover:text-white transition-colors" style="color: #9ca3af;">Careers</a>
+     </div>
+     <p class="text-gray-600 text-xs sm:text-sm">© 2025 Salah Global. All Rights Reserved.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Smooth scroll function
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    const defaultConfig = {
+      background_color: "#003366",
+      gold_accent_color: "#d4af37",
+      text_color: "#ffffff",
+      secondary_text_color: "#e5e7eb",
+      primary_action_color: "#d4af37",
+      font_family: "Montserrat",
+      font_size: 16,
+      company_name: "Al Salah Global Services",
+      tagline: "THE GATEWAY TO GCC INNOVATION",
+      subtitle: "Architecting the Future of Technology Across the GCC",
+      hero_description: "Al Salah Global delivers high-performance software solutions, precision hardware engineering, and elite technical staffing to empower the Gulf's most ambitious enterprises."
+    };
+
+    // Desktop Dropdown Functionality
+    const desktopDropdownToggle = document.getElementById('desktopDropdownToggle');
+    const desktopDropdownContent = document.getElementById('desktopDropdownContent');
+    let desktopDropdownOpen = false;
+
+    function toggleDesktopDropdown() {
+      desktopDropdownOpen = !desktopDropdownOpen;
+      const arrow = desktopDropdownToggle.querySelector('.dropdown-arrow');
+      if (desktopDropdownOpen) {
+        desktopDropdownContent.classList.add('active');
+        if (arrow) arrow.style.transform = 'rotate(90deg)';
+      } else {
+        desktopDropdownContent.classList.remove('active');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    desktopDropdownToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDesktopDropdown();
+    });
+
+    // Close desktop dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (desktopDropdownOpen && !e.target.closest('#desktopDropdown')) {
+        desktopDropdownContent.classList.remove('active');
+        const arrow = desktopDropdownToggle.querySelector('.dropdown-arrow');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+        desktopDropdownOpen = false;
+      }
+    });
+
+    // Close desktop dropdown when clicking on a dropdown item
+    document.querySelectorAll('#desktopDropdownContent .dropdown-item').forEach(item => {
+      item.addEventListener('click', () => {
+        desktopDropdownContent.classList.remove('active');
+        const arrow = desktopDropdownToggle.querySelector('.dropdown-arrow');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+        desktopDropdownOpen = false;
+      });
+    });
+
+    // Mobile Menu Functionality
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileDropdownToggle = document.getElementById('mobileDropdownToggle');
+    const mobileDropdownContent = document.getElementById('mobileDropdownContent');
+    const dropdownIcon = document.getElementById('dropdownIcon');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('active');
+      mobileOverlay.classList.add('active');
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+    }
+
+    function toggleMobileDropdown() {
+      const isActive = mobileDropdownContent.classList.toggle('active');
+      dropdownIcon.style.transform = isActive ? 'rotate(90deg)' : 'rotate(0deg)';
+    }
+
+    hamburger.addEventListener('click', openMobileMenu);
+    closeMenu.addEventListener('click', closeMobileMenu);
+    mobileOverlay.addEventListener('click', closeMobileMenu);
+    mobileDropdownToggle.addEventListener('click', toggleMobileDropdown);
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (!link.classList.contains('mobile-dropdown-toggle')) {
+          closeMobileMenu();
+        }
+      });
+    });
+
+    async function onConfigChange(config) {
+      const baseFontSize = config.font_size || defaultConfig.font_size;
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'Arial, sans-serif';
+      const fontFamily = `${customFont}, ${baseFontStack}`;
+
+      // Apply font sizing
+      document.body.style.fontSize = `${baseFontSize}px`;
+      document.querySelectorAll('h1, h2, h3, h4, p, button, div').forEach(el => {
+        el.style.fontFamily = fontFamily;
+      });
+
+      // Update colors
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const goldColor = config.gold_accent_color || defaultConfig.gold_accent_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+
+      document.querySelectorAll('.gold-accent').forEach(el => {
+        el.style.background = `linear-gradient(90deg, ${goldColor} 0%, #f4e5b0 50%, ${goldColor} 100%)`;
+        el.style.webkitBackgroundClip = 'text';
+        el.style.webkitTextFillColor = 'transparent';
+        el.style.backgroundClip = 'text';
+      });
+
+      // Update text content
+      const companyName = config.company_name || defaultConfig.company_name;
+      const tagline = config.tagline || defaultConfig.tagline;
+      const subtitle = config.subtitle || defaultConfig.subtitle;
+      const heroDescription = config.hero_description || defaultConfig.hero_description;
+
+      document.getElementById('company-name').textContent = companyName;
+      document.getElementById('tagline').textContent = tagline;
+      document.getElementById('subtitle').textContent = subtitle;
+      document.getElementById('hero-description').textContent = heroDescription;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.gold_accent_color || defaultConfig.gold_accent_color,
+            set: (value) => {
+              config.gold_accent_color = value;
+              window.elementSdk.setConfig({ gold_accent_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              window.elementSdk.setConfig({ primary_action_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["company_name", config.company_name || defaultConfig.company_name],
+        ["tagline", config.tagline || defaultConfig.tagline],
+        ["subtitle", config.subtitle || defaultConfig.subtitle],
+        ["hero_description", config.hero_description || defaultConfig.hero_description]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    // About Us Tab Functionality
+    const tabButtons = document.querySelectorAll('.about-tab-btn');
+    const tabContents = document.querySelectorAll('.about-tab-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+
+        // Remove active class from all buttons
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.classList.add('bg-white', 'bg-opacity-5', 'text-white', 'border', 'border-gray-700');
+        });
+
+        // Add active class to clicked button
+        button.classList.add('active');
+        button.classList.remove('bg-white', 'bg-opacity-5', 'text-white', 'border', 'border-gray-700');
+        button.style.background = 'linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%)';
+        button.style.color = '#003366';
+
+        // Hide all tab contents
+        tabContents.forEach(content => {
+          content.style.display = 'none';
+          content.classList.remove('active');
+        });
+
+        // Show selected tab content
+        const selectedContent = document.getElementById(targetTab);
+        if (selectedContent) {
+          selectedContent.style.display = 'block';
+          selectedContent.classList.add('active');
+        }
+      });
+    });
+
+    // Contact Form Functionality
+    const contactForm = document.getElementById('contactForm');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get form values
+      const fullName = document.getElementById('fullName').value;
+      const company = document.getElementById('company').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const message = document.getElementById('message').value;
+
+      // Create email body with all form data
+      const emailBody = `Full Name: ${fullName}%0D%0A%0D%0ACompany: ${company}%0D%0A%0D%0AEmail: ${email}%0D%0A%0D%0APhone: ${phone}%0D%0A%0D%0AMessage/Project Brief:%0D%0A${encodeURIComponent(message)}`;
+      
+      // Create email subject
+      const emailSubject = `Inquiry from ${fullName} - ${company}`;
+      
+      // Create Gmail compose link
+      const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=info@salahglobal.com&su=${encodeURIComponent(emailSubject)}&body=${emailBody}`;
+      
+      window.open(gmailLink, '_blank', 'noopener,noreferrer');
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9baaafc4e5833e1c',t:'MTc2Nzg2NDczNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
